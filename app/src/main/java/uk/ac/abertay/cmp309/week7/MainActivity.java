@@ -64,11 +64,15 @@ public class MainActivity extends Activity {
         /* The press on the notification will open MainActivity. */
         Intent openIntent = new Intent(getApplicationContext(), MainActivity.class);
         PendingIntent openPI = PendingIntent.getActivity(getApplicationContext(), 0, openIntent, 0);
-        textNotification = new Notification.Builder(getApplicationContext(), CHANNEL_ID_NORMAL)
+        textNotification = new Notification.Builder(getApplicationContext(), CHANNEL_ID_IMPORTANT)
                 .setSmallIcon(android.R.drawable.ic_dialog_email)
                 .setContentTitle("Text notification")
                 .setContentIntent(openPI)
                 .setAutoCancel(true);
+
+        //display full text
+        Intent fullintent = new Intent();
+        PendingIntent fullPI = PendingIntent.
     }
 
     /* Initialises notification channels */
