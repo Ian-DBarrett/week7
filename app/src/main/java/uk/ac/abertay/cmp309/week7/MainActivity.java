@@ -15,6 +15,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.activity.result.PickVisualMediaRequest;
+import androidx.core.app.NotificationCompat;
+
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
@@ -29,6 +32,8 @@ public class MainActivity extends Activity {
     Notification.Builder timerNotification;
     Notification.Builder textNotification;
 
+    NotificationCompat.BigPictureStyle myBitmap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +43,10 @@ public class MainActivity extends Activity {
         timeReceiver = new TimeReceiver();
         /* Initialise a notification manager. */
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        //myBitmap = BigPictureStyle (getApplicationContext(),c);
+
+
 
         /* !Make sure to initialise all channels before using them! */
         initNotificationChannels();
@@ -70,10 +79,25 @@ public class MainActivity extends Activity {
                 .setContentIntent(openPI)
                 .setAutoCancel(true);
 
+
+
         //display full text
-        Intent fullintent = new Intent();
-        PendingIntent fullPI = PendingIntent.
+       Intent fullintent = new Intent();
+        PendingIntent fullPI = PendingIntent.getActivity(getApplicationContext(),0,fullintent,0);
+        myBitmap = new NotificationCompat.BigPictureStyle(getApplicationContext()
+               .setSmallIcon(android.R.drawable.ic_dialog_alert)
+               .setContentTitle("Text notification")
+               .setContentIntent(fullPI)
+               .setAutoCancel(true);
+               .setStyle(new Notification.BigPictureStyle()
+                     .bigPicture(aBigBitmap));
+
     }
+
+
+
+
+
 
     /* Initialises notification channels */
     private void initNotificationChannels(){
